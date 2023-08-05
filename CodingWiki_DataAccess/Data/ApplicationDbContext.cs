@@ -12,5 +12,12 @@ namespace CodingWiki_DataAccess.Data
     {
         //Name of the property will be the table name
         public DbSet<Book> Books { get; set; }
+
+        //Hardcoding conection string... Conection string = servername = "WIN-3LVU4U8LLOI\SQLEXPRESS"
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer("Server=WIN-3LVU4U8LLOI\\SQLEXPRESS;Database=CodingWiki;TrustServerCertificate=True;Trusted_Connection=True;");
+        }
+
     }
 }
