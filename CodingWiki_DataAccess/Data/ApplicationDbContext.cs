@@ -10,15 +10,13 @@ namespace CodingWiki_DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        //Name of the property will be the table name
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Author> Authors{ get; set; }
-        public DbSet<Publisher> Publishers{ get; set; }
-        public DbSet<SubCategory> SubCategories{ get; set; }
-        public DbSet<BookDetail> BookDetails{ get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<Publisher> Publishers { get; set; }
+        public DbSet<BookDetail> BookDetails { get; set; }
 
-        //Hardcoding conection string... Conection string = servername = "WIN-3LVU4U8LLOI\SQLEXPRESS"
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer("Server=WIN-3LVU4U8LLOI\\SQLEXPRESS;Database=CodingWiki;TrustServerCertificate=True;Trusted_Connection=True;");
@@ -27,19 +25,27 @@ namespace CodingWiki_DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>().Property(u => u.Price).HasPrecision(10, 5);
-            //method 1
+
+            modelBuilder.Entity<BookAuthorMap>().HasKey(u => new { u.Author_Id, u.Book_Id });
+
             modelBuilder.Entity<Book>().HasData(
-                new Book { BookId=1, Title="Mythos", ISBN="123", Price=10.99m},
-                new Book { BookId=2, Title="On Writing", ISBN="123d", Price=9.99m}
-                );
-            //method 2
+                new Book { BookId = 1, Title = "Spider without Duty", ISBN = "123B12", Price = 10.99m, Publisher_Id = 1 },
+                new Book { BookId = 2, Title = "Fortune of time", ISBN = "12123B12", Price = 11.99m, Publisher_Id = 1 }
+            );
+
             var bookList = new Book[]
             {
-                new Book { BookId=3, Title="Homo Deus", ISBN="1453", Price=10.99m},
-                new Book { BookId=4, Title="Sapiens", ISBN="6543d", Price=9.99m}
+                new Book { BookId = 3, Title = "Fake Sunday", ISBN = "77652", Price = 20.99m, Publisher_Id=2 },
+                new Book { BookId = 4, Title = "Cookie Jar", ISBN = "CC12B12", Price = 25.99m , Publisher_Id=3},
+                new Book { BookId = 5, Title = "Cloudy Forest", ISBN = "90392B33", Price = 40.99m , Publisher_Id=3}
             };
-
             modelBuilder.Entity<Book>().HasData(bookList);
+
+            modelBuilder.Entity<Publisher>().HasData(
+                new Publisher { Publisher_Id = 1, Name = "Pub 1 Jimmy", Location = "Chicago" },
+                new Publisher { Publisher_Id = 2, Name = "Pub 2 John", Location = "New York" },
+                new Publisher { Publisher_Id = 3, Name = "Pub 3 Ben", Location = "Hawaii" }
+                );
         }
 
     }
