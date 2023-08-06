@@ -12,7 +12,7 @@ namespace CodingWiki_DataAccess.Data
     {
         //Name of the property will be the table name
         public DbSet<Book> Books { get; set; }
-        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         //Hardcoding conection string... Conection string = servername = "WIN-3LVU4U8LLOI\SQLEXPRESS"
         protected override void OnConfiguring(DbContextOptionsBuilder options)
