@@ -13,6 +13,9 @@ namespace CodingWiki_DataAccess.Data
         //Name of the property will be the table name
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Author> Authors{ get; set; }
+        public DbSet<Publisher> Publishers{ get; set; }
+        public DbSet<SubCategory> SubCategories{ get; set; }
 
         //Hardcoding conection string... Conection string = servername = "WIN-3LVU4U8LLOI\SQLEXPRESS"
         protected override void OnConfiguring(DbContextOptionsBuilder options)
