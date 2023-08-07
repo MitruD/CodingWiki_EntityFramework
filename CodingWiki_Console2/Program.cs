@@ -1,6 +1,7 @@
 ﻿using CodingWiki_DataAccess.Data;
 using CodingWiki_Model.Models;
 using Microsoft.EntityFrameworkCore;
+using static System.Reflection.Metadata.BlobBuilder;
 
 
 
@@ -18,8 +19,39 @@ Console.WriteLine("Hello, World!");
 //    }
 //}
 
-GetAllBooks();
+//GetAllBooks();
 //AddBook();
+GetBook();
+
+void GetBook()
+{
+    using var context = new ApplicationDbContext();
+    var books = context.Books.Where(u=>u.Publisher_Id==3  && u.Price>30);
+    //Console.WriteLine(book.Title + " - " + book.ISBN);
+    foreach (var book in books)
+    {
+        Console.WriteLine(book.Title + " - " + book.ISBN);
+    }
+}
+//void GetBook()
+//{
+//    using var context = new ApplicationDbContext();
+//    Book book = context.Books.First();
+//    Console.WriteLine(book.Title + " - " + book.ISBN);
+//}
+
+//void GetBook()
+//{
+//    try
+//    {
+//    using var context = new ApplicationDbContext();
+//    var book = context.Fluent_Books.FirstOrDefault();
+//    Console.WriteLine(book.Title + " - " + book.ISBN);
+//    }catch(Exception e)
+//    {
+
+//    }
+//}
 
 void GetAllBooks()
 {
