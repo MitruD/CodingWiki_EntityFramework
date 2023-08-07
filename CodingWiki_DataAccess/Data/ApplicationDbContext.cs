@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace CodingWiki_DataAccess.Data
 {
@@ -35,6 +36,9 @@ namespace CodingWiki_DataAccess.Data
             modelBuilder.Entity<Fluent_BookDetail>().Property(u => u.NumberOfChapters).HasColumnName("NoOfChapters");
             modelBuilder.Entity<Fluent_BookDetail>().Property(u => u.NumberOfChapters).IsRequired();
             modelBuilder.Entity<Fluent_BookDetail>().HasKey(u => u.BookDetail_Id);
+            modelBuilder.Entity<Fluent_BookDetail>().HasOne(b => b.Book).WithOne(b => b.BookDetail)
+                .HasForeignKey<Fluent_BookDetail>(u => u.Book_Id);
+
             
             modelBuilder.Entity<Fluent_Book>().Property(u => u.ISBN).HasMaxLength(50);
             modelBuilder.Entity<Fluent_Book>().Property(u => u.ISBN).IsRequired();
