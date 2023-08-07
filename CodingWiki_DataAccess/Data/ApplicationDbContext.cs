@@ -44,6 +44,8 @@ namespace CodingWiki_DataAccess.Data
             modelBuilder.Entity<Fluent_Book>().Property(u => u.ISBN).IsRequired();
             modelBuilder.Entity<Fluent_Book>().HasKey(u => u.BookId);
             modelBuilder.Entity<Fluent_Book>().Ignore(u => u.PriceRange);
+            modelBuilder.Entity<Fluent_Book>().HasOne(b => b.Publisher).WithMany(u => u.Books)
+                .HasForeignKey(u => u.Publisher_Id);
 
             modelBuilder.Entity<Fluent_Author>().HasKey(u => u.Author_Id);
             modelBuilder.Entity<Fluent_Author>().Property(u => u.FirstName).IsRequired();
