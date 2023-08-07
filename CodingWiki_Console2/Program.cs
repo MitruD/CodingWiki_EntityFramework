@@ -1,4 +1,5 @@
 ﻿using CodingWiki_DataAccess.Data;
+using CodingWiki_Model.Models;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -18,6 +19,7 @@ Console.WriteLine("Hello, World!");
 //}
 
 GetAllBooks();
+AddBook();
 
 void GetAllBooks()
 {
@@ -27,4 +29,19 @@ void GetAllBooks()
     {
         Console.WriteLine(book.Title + " - " + book.ISBN);
     }
+}
+
+void AddBook()
+{
+    Book book = new Book()
+    {
+        Title = "Test",
+        ISBN = "Test",
+        Price = 10.23m,
+        Publisher_Id = 1
+    };
+
+    using var context = new ApplicationDbContext();
+    var books = context.Books.Add(book);
+    context.SaveChanges();
 }
