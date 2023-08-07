@@ -26,12 +26,15 @@ GetBook();
 void GetBook()
 {
     using var context = new ApplicationDbContext();
-    var book = context.Books.Single(u=>u.BookId==1);
-    Console.WriteLine(book.Title + " - " + book.ISBN);
-    //foreach (var book in books)
-    //{
-    //    Console.WriteLine(book.Title + " - " + book.ISBN);
-    //}
+    //var books = context.Books.Where(u=>u.ISBN.Contains("12"));
+    //var books = context.Books.Where(u=>EF.Functions.Like(u.ISBN, "12%")).Max(u => u.Price);
+    //var books = context.Books.Where(u=>EF.Functions.Like(u.ISBN, "12%")).Count();
+    var books = context.Books.Where(u=>EF.Functions.Like(u.ISBN, "12%"));
+    //Console.WriteLine(book.Title + " - " + book.ISBN);
+    foreach (var book in books)
+    {
+        Console.WriteLine(book.Title + " - " + book.ISBN);
+    }
 }
 //void GetBook()
 //{
