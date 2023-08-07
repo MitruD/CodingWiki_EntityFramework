@@ -26,7 +26,7 @@ GetBook();
 void GetBook()
 {
     using var context = new ApplicationDbContext();
-    var book = context.Books.FirstOrDefault(u=>u.Title=="Cookie Jar");
+    var book = context.Books.Find(4);
     Console.WriteLine(book.Title + " - " + book.ISBN);
     //foreach (var book in books)
     //{
