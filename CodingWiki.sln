@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingWiki_Web", "CodingWiki_Web\CodingWiki_Web.csproj", "{7713410E-F48D-41F9-9009-A7DCFBEF961D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingWiki_Web", "CodingWiki_Web\CodingWiki_Web.csproj", "{7713410E-F48D-41F9-9009-A7DCFBEF961D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingWiki_DataAccess", "CodingWiki_DataAccess\CodingWiki_DataAccess.csproj", "{CD6E8FEB-D820-44DE-AB00-01C42CFC8C1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingWiki_DataAccess", "CodingWiki_DataAccess\CodingWiki_DataAccess.csproj", "{CD6E8FEB-D820-44DE-AB00-01C42CFC8C1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingWiki_Model", "CodingWiki_Model\CodingWiki_Model.csproj", "{3B259B53-5DC5-4338-94E7-ED3086388EC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodingWiki_Model", "CodingWiki_Model\CodingWiki_Model.csproj", "{3B259B53-5DC5-4338-94E7-ED3086388EC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingWiki_Console", "CodingWiki_Console\CodingWiki_Console.csproj", "{64F3234E-D46E-4EAA-8838-BDAF0DDD399B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingWiki_Console", "CodingWiki_Console2\CodingWiki_Console.csproj", "{63F4202B-9586-4A2F-A6E8-3BEFA2E1B990}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{3B259B53-5DC5-4338-94E7-ED3086388EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B259B53-5DC5-4338-94E7-ED3086388EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B259B53-5DC5-4338-94E7-ED3086388EC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64F3234E-D46E-4EAA-8838-BDAF0DDD399B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64F3234E-D46E-4EAA-8838-BDAF0DDD399B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64F3234E-D46E-4EAA-8838-BDAF0DDD399B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64F3234E-D46E-4EAA-8838-BDAF0DDD399B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63F4202B-9586-4A2F-A6E8-3BEFA2E1B990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F4202B-9586-4A2F-A6E8-3BEFA2E1B990}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F4202B-9586-4A2F-A6E8-3BEFA2E1B990}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F4202B-9586-4A2F-A6E8-3BEFA2E1B990}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

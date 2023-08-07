@@ -10,15 +10,12 @@ using System.Threading.Tasks;
 
 namespace CodingWiki_DataAccess.Data.FluentConfig
 {
-    public class FluentAuthoConfig : IEntityTypeConfiguration<Fluent_Author>
+    public class FluentPublisherConfig : IEntityTypeConfiguration<Fluent_Publisher>
     {
-        public void Configure(EntityTypeBuilder<Fluent_Author> modelBuilder)
+        public void Configure(EntityTypeBuilder<Fluent_Publisher> modelBuilder)
         {
-            modelBuilder.HasKey(u => u.Author_Id);
-            modelBuilder.Property(u => u.FirstName).IsRequired();
-            modelBuilder.Property(u => u.FirstName).HasMaxLength(50);
-            modelBuilder.Property(u => u.LastName).IsRequired();
-            modelBuilder.Ignore(u => u.FullName);
+            modelBuilder.Property(u => u.Name).IsRequired();
+            modelBuilder.HasKey(u => u.Publisher_Id);
         }
     }
 }

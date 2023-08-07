@@ -19,6 +19,7 @@ namespace CodingWiki_DataAccess.Data.FluentConfig
                 .HasForeignKey(u => u.Book_Id);
             modelBuilder.HasOne(u => u.Author).WithMany(u => u.BookAuthorMap)
                 .HasForeignKey(u => u.Author_Id);
+
         }
     }
 }

@@ -39,11 +39,11 @@ namespace CodingWiki_DataAccess.Data
             modelBuilder.Entity<BookAuthorMap>().HasKey(u => new { u.Author_Id, u.Book_Id });
 
             //Fluent API
-            modelBuilder.ApplyConfiguration(new FluentAuthoConfig());
-            modelBuilder.ApplyConfiguration(new FluentPublisherConfig());
-            modelBuilder.ApplyConfiguration(new FluentBookConfig());
-            modelBuilder.ApplyConfiguration(new FluentBookAuthorMapConfig());
             modelBuilder.ApplyConfiguration(new FluentAuthorConfig());
+            modelBuilder.ApplyConfiguration(new FluentBookAuthorMapConfig());
+            modelBuilder.ApplyConfiguration(new FluentBookConfig());
+            modelBuilder.ApplyConfiguration(new FluentBookDetailConfig());
+            modelBuilder.ApplyConfiguration(new FluentPublisherConfig());
 
             modelBuilder.Entity<Book>().HasData(
                 new Book { BookId = 1, Title = "Spider without Duty", ISBN = "123B12", Price = 10.99m, Publisher_Id = 1 },

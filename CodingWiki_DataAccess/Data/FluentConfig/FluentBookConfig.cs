@@ -18,7 +18,7 @@ namespace CodingWiki_DataAccess.Data.FluentConfig
             modelBuilder.Property(u => u.ISBN).IsRequired();
             modelBuilder.HasKey(u => u.BookId);
             modelBuilder.Ignore(u => u.PriceRange);
-            modelBuilder.HasOne(b => b.Publisher).WithMany(u => u.Books)
+            modelBuilder.HasOne(u => u.Publisher).WithMany(u => u.Books)
                 .HasForeignKey(u => u.Publisher_Id);
         }
     }
