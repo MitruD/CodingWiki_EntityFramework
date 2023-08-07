@@ -26,12 +26,12 @@ GetBook();
 void GetBook()
 {
     using var context = new ApplicationDbContext();
-    var books = context.Books.Where(u=>u.Publisher_Id==3  && u.Price>30);
-    //Console.WriteLine(book.Title + " - " + book.ISBN);
-    foreach (var book in books)
-    {
-        Console.WriteLine(book.Title + " - " + book.ISBN);
-    }
+    var book = context.Books.FirstOrDefault(u=>u.Title=="Cookie Jar");
+    Console.WriteLine(book.Title + " - " + book.ISBN);
+    //foreach (var book in books)
+    //{
+    //    Console.WriteLine(book.Title + " - " + book.ISBN);
+    //}
 }
 //void GetBook()
 //{
