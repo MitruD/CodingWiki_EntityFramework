@@ -1,6 +1,7 @@
 ﻿using CodingWiki_DataAccess.Data;
 using CodingWiki_Model.Models;
 using Microsoft.EntityFrameworkCore;
+using static System.Reflection.Metadata.BlobBuilder;
 
 
 
@@ -20,7 +21,42 @@ Console.WriteLine("Hello, World!");
 
 //GetAllBooks();
 //AddBook();
-GetBook();
+//GetBook();
+UpdateBook();
+
+//void UpdateBook()
+//{
+//    try
+//    {
+//        using var context = new ApplicationDbContext();
+//        var book = context.Books.Find(6);
+//        book.Title = "Sapiens";
+//        context.SaveChanges();
+//    }
+//    catch (Exception e)
+//    {
+
+//    }
+//}
+void UpdateBook()
+{
+    try
+    {
+        using var context = new ApplicationDbContext();
+        //var book = context.Books.Find(6);
+        var books = context.Books.Where(u=>u.Publisher_Id==1);
+        //Console.WriteLine(book.Title + " - " + book.ISBN);
+        foreach (var book in books)
+        {
+            book.Price = 55.55m;
+        }
+        context.SaveChanges();
+    }
+    catch (Exception e)
+    {
+
+    }
+}
 
 void GetBook()
 {
