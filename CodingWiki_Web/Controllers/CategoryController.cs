@@ -33,6 +33,21 @@ namespace CodingWiki_Web.Controllers
             }
             return View(obj);
         }
+        
+        public async Task<IActionResult> Delete(int id)
+        {
+            Category obj = new();
+            obj = _db.Categories.First(u => u.CategoryId == id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.Categories.Remove(obj);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -51,6 +66,7 @@ namespace CodingWiki_Web.Controllers
                     _db.Categories.Update(obj);
                 }
                 await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
             return View(obj);
         }
