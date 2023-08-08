@@ -1,7 +1,6 @@
 ﻿using CodingWiki_DataAccess.Data;
 using CodingWiki_Model.Models;
 using Microsoft.EntityFrameworkCore;
-using static System.Reflection.Metadata.BlobBuilder;
 
 
 
@@ -29,7 +28,8 @@ void GetBook()
     //var books = context.Books.Where(u=>u.ISBN.Contains("12"));
     //var books = context.Books.Where(u=>EF.Functions.Like(u.ISBN, "12%")).Max(u => u.Price);
     //var books = context.Books.Where(u=>EF.Functions.Like(u.ISBN, "12%")).Count();
-    var books = context.Books.Where(u=>EF.Functions.Like(u.ISBN, "12%"));
+    //var books = context.Books.Where(u => EF.Functions.Like(u.ISBN, "12%"));
+    var books = context.Books.Where(u => u.Price > 10).OrderBy(u => u.Title).ThenByDescending(u => u.ISBN);
     //Console.WriteLine(book.Title + " - " + book.ISBN);
     foreach (var book in books)
     {
