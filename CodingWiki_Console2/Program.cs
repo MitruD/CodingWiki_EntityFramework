@@ -29,7 +29,11 @@ void GetBook()
     //var books = context.Books.Where(u=>EF.Functions.Like(u.ISBN, "12%")).Max(u => u.Price);
     //var books = context.Books.Where(u=>EF.Functions.Like(u.ISBN, "12%")).Count();
     //var books = context.Books.Where(u => EF.Functions.Like(u.ISBN, "12%"));
-    var books = context.Books.Where(u => u.Price > 10).OrderBy(u => u.Title).ThenByDescending(u => u.ISBN);
+    //var books = context.Books.Where(u => u.Price > 10).OrderBy(u => u.Title).ThenByDescending(u => u.ISBN);
+    
+    //Pagination Methods
+    var books = context.Books.Skip(0).Take(2);
+   
     //Console.WriteLine(book.Title + " - " + book.ISBN);
     foreach (var book in books)
     {
