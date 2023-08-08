@@ -20,16 +20,37 @@ namespace CodingWiki_Web.Controllers
         public IActionResult Upsert(int? id)
         {
             Category obj = new();
-            if (id == null || id==0)
+            if (id == null || id == 0)
             {
                 //Create
                 return View(obj);
             }
             //Edit
-            obj=_db.Categories.First(u=>u.CategoryId == id);
-            if(obj == null)
+            obj = _db.Categories.First(u => u.CategoryId == id);
+            if (obj == null)
             {
                 return NotFound();
+            }
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upsert(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                if (obj.CategoryId == 0)
+                {
+                    //create
+                    await _db.Categories.AddAsync(obj);
+                }
+                else
+                {
+                    //update
+                    _db.Categories.Update(obj);
+                }
+                await _db.SaveChangesAsync();
             }
             return View(obj);
         }
