@@ -22,7 +22,16 @@ Console.WriteLine("Hello, World!");
 //GetAllBooks();
 //AddBook();
 //GetBook();
-UpdateBook();
+//UpdateBook();
+DeleteBook();
+
+void DeleteBook()
+{
+    using var context = new ApplicationDbContext();
+    var book = context.Books.Find(6);
+    context.Books.Remove(book);
+    context.SaveChanges();
+}
 
 //void UpdateBook()
 //{
@@ -43,9 +52,7 @@ void UpdateBook()
     try
     {
         using var context = new ApplicationDbContext();
-        //var book = context.Books.Find(6);
         var books = context.Books.Where(u=>u.Publisher_Id==1);
-        //Console.WriteLine(book.Title + " - " + book.ISBN);
         foreach (var book in books)
         {
             book.Price = 55.55m;
