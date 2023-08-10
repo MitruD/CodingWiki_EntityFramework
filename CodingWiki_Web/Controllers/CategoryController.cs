@@ -71,7 +71,7 @@ namespace CodingWiki_Web.Controllers
             return View(obj);
         }
 
-        public IActionResult CreateMultiple2(int? id)
+        public IActionResult CreateMultiple2()
         {
             List<Category> obj = new List<Category>();
             for (int i = 1; i <= 2; i++)
@@ -82,15 +82,29 @@ namespace CodingWiki_Web.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public IActionResult CreateMultiple5(int? id)
+        public IActionResult CreateMultiple5()
         {
             List<Category> obj = new List<Category>();
             for (int i = 1; i <= 5; i++)
             {
                 obj.Add(new Category { CategoryName = Guid.NewGuid().ToString() });
             }
-            _db.SaveChanges();
             _db.Categories.AddRange(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult RemoveMultiple2()
+        {
+            List<Category> obj = _db.Categories.OrderByDescending(x => x.CategoryId).Take(2).ToList();
+            _db.Categories.RemoveRange(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult RemoveMultiple5()
+        {
+            List<Category> obj = _db.Categories.OrderByDescending(x => x.CategoryId).Take(5).ToList();
+            _db.Categories.RemoveRange(obj);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }
