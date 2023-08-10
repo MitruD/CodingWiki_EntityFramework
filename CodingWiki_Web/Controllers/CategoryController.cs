@@ -33,7 +33,7 @@ namespace CodingWiki_Web.Controllers
             }
             return View(obj);
         }
-        
+
         public async Task<IActionResult> Delete(int id)
         {
             Category obj = new();
@@ -69,6 +69,29 @@ namespace CodingWiki_Web.Controllers
                 return RedirectToAction("Index");
             }
             return View(obj);
+        }
+
+        public IActionResult CreateMultiple2(int? id)
+        {
+            List<Category> obj = new List<Category>();
+            for (int i = 1; i <= 2; i++)
+            {
+                obj.Add(new Category { CategoryName = Guid.NewGuid().ToString() });
+            }
+            _db.Categories.AddRange(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult CreateMultiple5(int? id)
+        {
+            List<Category> obj = new List<Category>();
+            for (int i = 1; i <= 5; i++)
+            {
+                obj.Add(new Category { CategoryName = Guid.NewGuid().ToString() });
+            }
+            _db.SaveChanges();
+            _db.Categories.AddRange(obj);
+            return RedirectToAction("Index");
         }
     }
 }
