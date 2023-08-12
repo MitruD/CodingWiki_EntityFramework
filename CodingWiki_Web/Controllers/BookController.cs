@@ -25,7 +25,7 @@ namespace CodingWiki_Web.Controllers
 
             obj.PublisherList = _db.Publishers.Select(i => new SelectListItem
             {
-                Text=i.Name,
+                Text = i.Name,
                 Value = i.Publisher_Id.ToString(),
             });
 
@@ -43,42 +43,37 @@ namespace CodingWiki_Web.Controllers
             return View(obj);
         }
 
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    Category obj = new();
-        //    obj = _db.Categories.FirstOrDefault(u => u.CategoryId == id);
-        //    if (obj == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upsert(BookVM obj)
+        {
+            if (obj.Book.BookId == 0)
+            {
+                //create
+                await _db.Books.AddAsync(obj.Book);
+            }
+            else
+            {
+                //update
+                _db.Books.Update(obj.Book);
+            }
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
-        //    _db.Categories.Remove(obj);
-        //    await _db.SaveChangesAsync();
-        //    return RedirectToAction("Index");
+        public async Task<IActionResult> Delete(int id)
+        {
+            Book obj = new();
+            obj = _db.Books.FirstOrDefault(u => u.BookId == id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
 
-        //}
+            _db.Books.Remove(obj);
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Upsert(Category obj)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (obj.CategoryId == 0)
-        //        {
-        //            //create
-        //            await _db.Categories.AddAsync(obj);
-        //        }
-        //        else
-        //        {
-        //            //update
-        //            _db.Categories.Update(obj);
-        //        }
-        //        await _db.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(obj);
-        //}
-
+        }
     }
 }
