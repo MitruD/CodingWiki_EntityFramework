@@ -84,5 +84,41 @@ namespace CodingWiki_Web.Controllers
             return RedirectToAction("Index");
 
         }
+
+        public IActionResult Details(int? id)
+        {
+            BookVM obj = new();
+
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            //Edit
+            obj.Book = _db.Books.FirstOrDefault(u => u.BookId == id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Details(BookVM obj)
+        {
+            if (obj.Book.BookId == 0)
+            {
+                //create
+                await _db.Books.AddAsync(obj.Book);
+            }
+            else
+            {
+                //update
+                _db.Books.Update(obj.Book);
+            }
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
     }
 }
