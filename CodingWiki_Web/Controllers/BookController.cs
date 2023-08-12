@@ -3,6 +3,7 @@ using CodingWiki_Model.Models;
 using CodingWiki_Model.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.InteropServices;
 
@@ -17,7 +18,7 @@ namespace CodingWiki_Web.Controllers
         }
         public IActionResult Index()
         {
-            List<Book> objList = _db.Books.Include(u=>u.Publisher).ToList();
+            List<Book> objList = _db.Books.Include(u => u.Publisher).ToList();
             //foreach (var obj in objList)
             //{
             //    //least effeicnet
@@ -76,7 +77,7 @@ namespace CodingWiki_Web.Controllers
             BookDetail obj = new();
 
             //edit
-            obj = _db.BookDetails.Include(u=>u.Book).FirstOrDefault(u => u.Book_Id == id);
+            obj = _db.BookDetails.Include(u => u.Book).FirstOrDefault(u => u.Book_Id == id);
             if (obj == null)
             {
                 return NotFound();
@@ -114,17 +115,32 @@ namespace CodingWiki_Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult ManageAuthors(int id)
+        {
+            BookAuthorVM obj = new()
+            {
+                BookAuthorList = _db.BookAuthorMaps.Include(u => u.Author).Include(u => u.Book)
+                    .Where(u => u.Book_Id == id).ToList(),
+                BookAuthor=new()
+                {
+                    Book_Id= id
+                },
+                Book= _db.Books.FirstOrDefault(u=>u.BookId == id)
+            };
+            return View();
+        }
+
         public async Task<IActionResult> Playground()
         {
             //updating related data
-            var bookdetails1 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b=>b.BookDetail_Id==5);
+            var bookdetails1 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b => b.BookDetail_Id == 5);
             bookdetails1.NumberOfChapters = 5;
             bookdetails1.Book.Price = 5;
             _db.BookDetails.Update(bookdetails1);
             _db.SaveChanges();
 
             //updating related data
-            var bookdetails2 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b=>b.BookDetail_Id==5);
+            var bookdetails2 = _db.BookDetails.Include(b => b.Book).FirstOrDefault(b => b.BookDetail_Id == 5);
             bookdetails2.NumberOfChapters = 7;
             bookdetails2.Book.Price = 7;
             _db.BookDetails.Attach(bookdetails2);
