@@ -23,11 +23,11 @@
                     <th>
                         Title
                     </th>
-
+                    <th>Price</th>
+                    <th>
+                        Publisher
+                    </th>
                     @*<th>
-                Publisher
-                </th>
-                <th>
                 Authors
                 </th>*@
                     <th></th>
@@ -38,14 +38,15 @@
                         <td>
                             @item.Title
                         </td>
+                        <td>@item.Price.ToString("c")</td>
+                        <td>
+                            @item.Publisher.Name
+                        </td>
                         @*<td>
-                @item.Publisher.Name
-                </td>
-                <td>
                 @{
                 var authors = "";
                 }
-                @foreach(var auth in item.BookAuthors)
+                @foreach (var auth in item.BookAuthors)
                 {
                 authors += @auth.Author.FullName + ", ";
                 }

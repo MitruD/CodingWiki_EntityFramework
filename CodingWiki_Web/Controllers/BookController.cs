@@ -16,7 +16,16 @@ namespace CodingWiki_Web.Controllers
         public IActionResult Index()
         {
             List<Book> objList = _db.Books.ToList();
+            foreach(var obj in objList)
+            {
+                //Least effeicient
+                //obj.Publisher = _db.Publishers.Find(obj.Publisher_Id);
+
+                //More  effeicient
+                _db.Entry(obj).Reference(u=>u.Publisher).Load();
+            }
             return View(objList);
+
         }
 
         public IActionResult Upsert(int? id)
