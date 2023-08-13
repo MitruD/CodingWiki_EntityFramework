@@ -121,23 +121,23 @@ namespace CodingWiki_Web.Controllers
             {
                 BookAuthorList = _db.BookAuthorMaps.Include(u => u.Author).Include(u => u.Book)
                     .Where(u => u.Book_Id == id).ToList(),
-                BookAuthor=new()
+                BookAuthor = new()
                 {
-                    Book_Id= id
+                    Book_Id = id
                 },
-                Book= _db.Books.FirstOrDefault(u=>u.BookId == id)
+                Book = _db.Books.FirstOrDefault(u => u.BookId == id)
             };
 
-            List<int> tempListOfAssignedAuthor = obj.BookAuthorList.Select(u=>u.Author_Id).ToList();
+            List<int> tempListOfAssignedAuthor = obj.BookAuthorList.Select(u => u.Author_Id).ToList();
 
             //NOT IN clause
             //get all the authors whos id is not in tempListOfAssignedAuthor
 
-            var tempList = _db.Authors.Where(u=> !tempListOfAssignedAuthor.Contains(u.Author_Id)).ToList();
+            var tempList = _db.Authors.Where(u => !tempListOfAssignedAuthor.Contains(u.Author_Id)).ToList();
             obj.AuthorList = tempList.Select(i => new SelectListItem
             {
-                Text=i.FullName,
-                Value=i.Author_Id.ToString()
+                Text = i.FullName,
+                Value = i.Author_Id.ToString()
             });
 
             return View(obj);
@@ -146,12 +146,24 @@ namespace CodingWiki_Web.Controllers
         [HttpPost]
         public IActionResult ManageAuthors(BookAuthorVM bookAuthorVM)
         {
-            if(bookAuthorVM.BookAuthor.Book_Id!=0 && bookAuthorVM.BookAuthor.Author_Id!=0) 
+            if (bookAuthorVM.BookAuthor.Book_Id != 0 && bookAuthorVM.BookAuthor.Author_Id != 0)
             {
                 _db.BookAuthorMaps.Add(bookAuthorVM.BookAuthor);
                 _db.SaveChanges();
             }
-            return RedirectToAction(nameof(ManageAuthors), new {@id = bookAuthorVM.BookAuthor.Book_Id});
+            return RedirectToAction(nameof(ManageAuthors), new { @id = bookAuthorVM.BookAuthor.Book_Id });
+        }
+
+
+        [HttpPost]
+        public IActionResult RemoveAuthors(int authorId, BookAuthorVM bookAuthorVM)
+        {
+            int bookId = bookAuthorVM.Book.BookId;
+            BookAuthorMap bookAuthorMap = _db.BookAuthorMaps.FirstOrDefault(
+                u => u.Author_Id == authorId && u.Book_Id == bookId);
+            _db.BookAuthorMaps.Remove(bookAuthorMap);
+            _db.SaveChanges();
+            return RedirectToAction(nameof(ManageAuthors), new { @id = bookId });
         }
 
 
